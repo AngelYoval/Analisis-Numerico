@@ -1,0 +1,35 @@
+% La función "NewtonR"  usa el metodo de Newton-Raphson
+% para hallar la raiz de una funcion dada a paritr de un punto inicial dado
+% por el usiario en donde la darivada no se anula
+%
+% Las entradas de la funcion son:
+% fun = la funcion a la cual se le calculará la raíz, la funcion debe ser
+% ingresada entre comillas simples y respetanto el lenguaje de matlab.
+% x0 = El punto inicial
+% N= numero de iteraciones 
+%tol= tolerancia del error
+function NewtonR
+        syms f(x)
+        f(x)=input('ingresa la funcion\n');
+        Df=diff(f,x);
+        x0=input('Ingresa el punto inicial x0\n');
+        N=input('ingresa el numero de iteraciones\n');
+        tol=input('ingresa la tolerancia del error\n');
+
+        i=1;
+        while i<=N
+             fa=f(x0);
+             dfa=Df(x0);
+             x1=x0-fa/dfa;
+             e=abs(x1-x0);
+             if e<tol
+                fprintf('La aproximacion a la raiz es %f\n',x1)
+                break;
+             end
+             x0=x1;
+        end
+        i=i+1;
+        if i>N
+           fprintf('No se encontro una raíz con error menor a %f en %d iteraciones',tol,N)
+        end 
+end
